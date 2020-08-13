@@ -47,8 +47,37 @@ class MyRover:
         cmd = input("F = Forward, B = Backward, L = Turn Left, R = Turn Right. String multiple letters together for "
                     "one large command (eg: ffflfrf goes forward three times, turns left, goes forward, turns right"
                     "then goes forward one more time: ")
+        cmd = cmd.upper()
 
-        pass
+        # TODO: Implement find and replace
+        # fwd = "FORWARD"
+        # back = "BACK"
+        # left = "LEFT"
+        # right = "RIGHT"  -> These variables will be used to find the words in cmd and for each instance of it, replace
+        #                  -> with the relevant letter (F/B/L/R)
+
+        if cmd == "FORWARD":
+            cmd = "F"
+        if cmd == "BACKWARD" or cmd == "BACK":
+            cmd = "B"
+        if cmd == "LEFT":
+            cmd = "L"
+        if cmd == "RIGHT":
+            cmd = "R"
+
+        char = []
+        for i in range(len(cmd)):
+            char += cmd[i]
+
+        for i in range(len(char)):
+            if char[i] == "F":
+                MyRover.move_x_axis(self, "F")
+            elif char[i] == "B":
+                MyRover.move_x_axis(self, "B")
+            elif char[i] == "L":
+                MyRover.turn_left(self)
+            elif char[i] == "R":
+                MyRover.turn_right(self)
 
     def move_x_axis(self, moving):
         """
@@ -107,28 +136,33 @@ class MyRover:
 
     def turn_left(self):
         if self.direction == "N":
+            print("direction is now West (W)")
             self.direction = "W"
         elif self.direction == "E":
+            print("direction is now North (N)")
             self.direction = "N"
         elif self.direction == "S":
+            print("direction is now East (E)")
             self.direction = "E"
         elif self.direction == "W":
+            print("direction is now South (S)")
             self.direction = "S"
         return self.direction
 
     def turn_right(self):
         if self.direction == "N":
+            print("direction is now East (E)")
             self.direction = "E"
         elif self.direction == "E":
+            print("direction is now South (S)")
             self.direction = "S"
         elif self.direction == "S":
+            print("direction is now West (W)")
             self.direction = "W"
         elif self.direction == "W":
+            print("direction is now North (N)")
             self.direction = "N"
         return self.direction
-
-    def await_commands(self):
-        return 100
 
     def abort_mission(self):
         """Call abort_mission when an unexpected value is predicted.
@@ -141,6 +175,7 @@ class SurfaceOfMars:
     """SurfaceOfMars is called to define a grid for Mars. Just how big is Mars?!"""
 
     def __init__(self, x, y):
+        print("BRB, preparing Mars!")
         self.x = x
         self.y = y
         self.x_obstacle = 4
@@ -158,10 +193,13 @@ class SurfaceOfMars:
             self.obstacle_list[1].append(0)
             i2 += 1
 
-        for i in self.obstacle_list[0]:
-            if i % self.x_obstacle == 0:
-                print("Ooh adding a rock")
+        print("obstacle_list[0] has: " + str(self.obstacle_list[0]))
+        print("obstacle_list[1] has: " + str(self.obstacle_list[1]))
 
+        for i in self.obstacle_list[0][::self.x_obstacle]:
+            self.obstacle_list[0][::self.x_obstacle].insert(i, 1)
+
+        print("This is a rock list: " + str(self.obstacle_list[0]))
 
     def confirm_mars(self):
         print("We confirm that Mars is: " + str(self.x) + " on the x axis and " + str(self.y) + " on the y axis.")

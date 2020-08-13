@@ -6,20 +6,18 @@ class TestModules(unittest.TestCase):
     def test_00_exists(self):
         self.assertTrue(1)
 
-    # def test_01_check_main_py(self):
-    #     mars = main.SurfaceOfMars(50, 50)
-    #     outcome = main.MyRover([5, 11], "N", mars)
-    #     self.assertEqual(outcome, 100)
-    #
-    # def test_02_check_wrong_variable_type(self):
-    #     mars = main.SurfaceOfMars(50, 50)
-    #     outcome = main.MyRover("Woof n floof", "haha", mars)
-    #     self.assertEqual(outcome, -1)
-    #
-    # def test_03_create_a_mars(self):
-    #     mars = main.SurfaceOfMars(50, 50)
-    #     mars_size = mars.confirm_mars()
-    #     self.assertEqual(mars_size, (50, 50))
+    def test_01_check_main_py(self):
+        mars = main.SurfaceOfMars(50, 50)
+        outcome = main.MyRover([5, 11], "N", mars)
+
+    def test_02_check_wrong_variable_type(self):
+        mars = main.SurfaceOfMars(50, 50)
+        outcome = main.MyRover("Woof n floof", "haha", mars)
+
+    def test_03_create_a_mars(self):
+        mars = main.SurfaceOfMars(50, 50)
+        mars_size = mars.confirm_mars()
+        self.assertEqual(mars_size, (50, 50))
 
     def test_04_move_forward(self):
         mars = main.SurfaceOfMars(50, 50)
@@ -37,19 +35,27 @@ class TestModules(unittest.TestCase):
         outcome.move_x_axis("f")
         outcome.move_x_axis("f")
 
-    # def test_07_move_backward_off_map(self):
-    #     mars = main.SurfaceOfMars(50, 50)
-    #     outcome = main.MyRover([5, 11], "N", mars)
-    #     outcome.move_x_axis("b")
-    #     outcome.move_x_axis("b")
-    #     outcome.move_x_axis("b")
-    #     outcome.move_x_axis("b")
-    #     outcome.move_x_axis("b")
-    #     outcome.move_x_axis("b")
-    #     outcome.move_x_axis("b")
-    #     outcome.move_x_axis("b")
+    def test_07_move_backward_off_map(self):
+        mars = main.SurfaceOfMars(50, 50)
+        outcome = main.MyRover([5, 11], "N", mars)
+        outcome.move_x_axis("b")
+        outcome.move_x_axis("b")
+        outcome.move_x_axis("b")
+        outcome.move_x_axis("b")
+        outcome.move_x_axis("b")
+        outcome.move_x_axis("b")
+        outcome.move_x_axis("b")
+        outcome.move_x_axis("b")
 
     def test_08_move_based_on_string_of_characters(self):
         mars = main.SurfaceOfMars(50, 50)
         outcome = main.MyRover([5, 11], "N", mars)
         outcome.move_x_axis("bbbbbbbbbbbb")
+
+    def test_09_move_and_hit_obstacle(self):
+        pass
+
+    def test_10_user_defined_movement(self):
+        mars = main.SurfaceOfMars(50, 50)
+        outcome = main.MyRover([5, 11], "N", mars)
+        outcome.get_commands()
